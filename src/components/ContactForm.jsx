@@ -2,8 +2,12 @@ import NameInput from './NameInput';
 import NumberInput from './NumberInput';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { addContact } from '../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
 
-export function ContactForm({ onAddContact }) {
+export function ContactForm() {
+  const dispatch = useDispatch();
+
   const [contactName, setContactName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -21,9 +25,9 @@ export function ContactForm({ onAddContact }) {
         event.preventDefault();
         // Validate name and number
 
-        onAddContact({ name: contactName, number });
-        setContactName(contactName);
-        setNumber(number);
+        dispatch(addContact({ newContact: { name: contactName, number } }));
+        setContactName('');
+        setNumber('');
       }}
     >
       <NameInput

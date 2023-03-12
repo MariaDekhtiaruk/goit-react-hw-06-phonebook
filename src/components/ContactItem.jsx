@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
 import { ContactPropType } from 'ContactPropType';
+import { deleteContact } from '../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
 
-const ContactItem = ({ contact: { name, number, id }, onDeleteContact }) => {
+const ContactItem = ({ contact: { name, number, id } }) => {
+  const dispatch = useDispatch();
+
   return (
     <li className="list-item">
       {name}: {number}
       <button
         type="button"
         className="button-delete"
-        onClick={() => onDeleteContact(id)}
+        onClick={() => dispatch(deleteContact({ contactId: id }))}
       >
         Delete
       </button>

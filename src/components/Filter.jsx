@@ -1,9 +1,13 @@
 import NameInput from './NameInput';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'redux/contactsSlice';
 
-export function Filter({ onFilterUpdate }) {
+export function Filter() {
+  const dispatch = useDispatch();
+
   const onChangeHandler = evt => {
-    onFilterUpdate(evt.target.value);
+    dispatch(setFilter({ filter: evt.target.value }));
   };
 
   return (
